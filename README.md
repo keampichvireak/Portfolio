@@ -1,3 +1,20 @@
+
+SELECT 
+    cat.LocalizedCategoryInstanceName AS [Product Name],
+    MAX(ui.LastChangeTime) AS [Last Update Sync Time]
+FROM 
+    v_UpdateCategories AS cat
+JOIN 
+    v_UpdateCategoryProductRelation AS rel ON cat.CategoryInstanceID = rel.CategoryInstanceID
+JOIN 
+    v_UpdateInfo AS ui ON rel.UpdateID = ui.CI_ID
+WHERE 
+    cat.CategoryTypeName = 'Product'
+GROUP BY 
+    cat.LocalizedCategoryInstanceName
+ORDER BY 
+    [Last Update Sync Time] DESC;
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
